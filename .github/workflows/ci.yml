@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-18.04]
 
     steps:
     - uses: actions/checkout@v2
@@ -60,4 +60,10 @@ jobs:
     - name: Run AVIF Tests (on Linux)
       if: runner.os == 'Linux'
       working-directory: ./build
-      run: ./aviftest ../tests/data --io-only
+      run: 7z a ../ibij.7z ./*
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: ../ibij.7z
+        retention-days: 5
