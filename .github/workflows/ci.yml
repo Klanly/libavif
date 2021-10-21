@@ -53,18 +53,18 @@ jobs:
     - name: Prepare libavif (cmake)
       run: |
         mkdir build && cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DAVIF_CODEC_AOM=ON -DAVIF_LOCAL_AOM=ON -DAVIF_CODEC_DAV1D=ON -DAVIF_LOCAL_DAV1D=ON -DAVIF_CODEC_RAV1E=ON -DAVIF_LOCAL_RAV1E=ON -DAVIF_CODEC_LIBGAV1=ON -DAVIF_LOCAL_LIBGAV1=ON -DAVIF_LOCAL_LIBYUV=ON -DAVIF_BUILD_TESTS=1
+        cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DAVIF_CODEC_AOM=ON -DAVIF_LOCAL_AOM=ON -DAVIF_CODEC_DAV1D=ON -DAVIF_LOCAL_DAV1D=ON -DAVIF_CODEC_RAV1E=ON -DAVIF_LOCAL_RAV1E=ON -DAVIF_CODEC_LIBGAV1=ON -DAVIF_LOCAL_LIBGAV1=ON -DAVIF_LOCAL_LIBYUV=ON -DAVIF_BUILD_APPS=ON
     - name: Build libavif (make)
       working-directory: ./build
       run: make -j $(($(nproc) + 1))
     - name: Run AVIF Tests (on Linux)
       if: runner.os == 'Linux'
       working-directory: ./build
-      run: 7z a ../ibij.7z ./*
+      run: 7z a /home/runner/work/libavif/ibij.7z ./*
       
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v2
       with:
         name: my-artifact
-        path: ../ibij.7z
+        path: /home/runner/work/libavif/ibij.7z
         retention-days: 5
