@@ -61,6 +61,7 @@ jobs:
       if: runner.os == 'Linux'
       working-directory: ./build
       run: 7z a ../ibij.7z ./*
+      
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v2
       with:
